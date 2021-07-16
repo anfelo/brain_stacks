@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232953206943",
+    "project_id": "brain-stacks",
+    "storage_bucket": "brain-stacks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232953206943:android:e49d1b8a5d969f5d9aeaaa",
+        "android_client_info": {
+          "package_name": "com.obros.brainstacks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232953206943-6dqnucds7i90bjuo1n2rjh6heo5qhc80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgIC6BLSIvlr2Q0nKYzqpHfaHbPb2JqGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232953206943-6dqnucds7i90bjuo1n2rjh6heo5qhc80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
