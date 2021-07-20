@@ -1,3 +1,4 @@
+import 'package:brain_stacks/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:brain_stacks/models/models.dart';
 
@@ -42,7 +43,16 @@ class CardGroupItem extends StatelessWidget {
                       ),
                       SizedBox(height: 12.0),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Future.delayed(Duration.zero, () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CardStackScreen(stack: stack),
+                              ),
+                            );
+                          });
+                        },
                         child: Text('START LEARNING'),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

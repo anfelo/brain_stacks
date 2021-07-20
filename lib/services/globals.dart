@@ -8,6 +8,7 @@ class Global {
   // Data Models
   static final Map models = {
     Topic: (data) => Topic.fromMap(data),
+    ContentCard: (data) => ContentCard.fromMap(data),
   };
 
   // Firestore References for Writes
