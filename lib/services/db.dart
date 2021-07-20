@@ -36,8 +36,11 @@ class Collection<T> {
   }
 
   Future<List<T>> getData() async {
-    var snapshots = await ref.get().then((snapshot) =>
-        snapshot.docs.map((doc) => Global.models[T](doc.data()) as T).toList());
+    var snapshots = await ref.get().then(
+          (snapshot) => snapshot.docs
+              .map((doc) => Global.models[T](doc.data()) as T)
+              .toList(),
+        );
     return snapshots;
   }
 

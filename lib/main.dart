@@ -34,6 +34,9 @@ class MyApp extends StatelessWidget {
           bottomAppBarTheme: BottomAppBarTheme(
             color: Colors.black87,
           ),
+          primaryColor: Colors.deepPurple,
+          primarySwatch: Colors.deepPurple,
+          accentColor: Colors.deepOrangeAccent,
           brightness: Brightness.dark,
           textTheme: TextTheme(
             bodyText1: TextStyle(fontSize: 18),
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
             headline1: TextStyle(fontWeight: FontWeight.bold),
             subtitle1: TextStyle(color: Colors.grey),
           ),
-          buttonTheme: ButtonThemeData(),
+          buttonTheme: ButtonThemeData(height: 100.0),
         ),
       ),
     );

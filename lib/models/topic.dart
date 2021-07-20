@@ -5,7 +5,8 @@ class Topic {
   final String title;
   final String description;
   final String img;
-  final List<Stack> stacks;
+  final List<CardStack> stacks;
+  final List<CardGroup> groups;
 
   Topic({
     required this.id,
@@ -13,6 +14,7 @@ class Topic {
     required this.description,
     required this.img,
     required this.stacks,
+    required this.groups,
   });
 
   factory Topic.fromMap(Map data) {
@@ -21,7 +23,10 @@ class Topic {
       title: data['title'] ?? '',
       description: data['description'] ?? '',
       img: data['img'] ?? 'default.png',
-      stacks: (data['stacks'] as List).map((v) => Stack.fromMap(v)).toList(),
+      stacks:
+          (data['stacks'] as List).map((v) => CardStack.fromMap(v)).toList(),
+      groups:
+          (data['groups'] as List).map((v) => CardGroup.fromMap(v)).toList(),
     );
   }
 }

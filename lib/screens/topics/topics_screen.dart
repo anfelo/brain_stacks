@@ -18,7 +18,7 @@ class TopicsScreen extends StatelessWidget {
           List<Topic> topics = snap.data;
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.deepPurple,
+              backgroundColor: Colors.transparent,
               title: Text('Topics'),
             ),
             body: GridView.count(
@@ -36,7 +36,7 @@ class TopicsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 DotLoader(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.deepPurple,
                   duration: Duration(milliseconds: 800),
                   size: 25,
                 ),
