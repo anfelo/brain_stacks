@@ -1,7 +1,9 @@
-import 'package:brain_stacks/services/services.dart';
-import 'package:brain_stacks/widgets/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:brain_stacks/models/models.dart';
+import 'package:brain_stacks/screens/card_stack/widgets/card_item.dart';
+import 'package:brain_stacks/screens/card_stack/widgets/card_stack_bottom_nav.dart';
+import 'package:brain_stacks/screens/screens.dart';
+import 'package:brain_stacks/services/services.dart';
+import 'package:flutter/material.dart';
 
 class CardStackScreen extends StatefulWidget {
   final CardStack stack;
@@ -16,19 +18,30 @@ class CardStackScreen extends StatefulWidget {
 }
 
 class _CardStackScreenState extends State<CardStackScreen> {
-  List<Widget> _cardList = [];
+  int _currentIndex = 0;
 
-  void _removeCard(index) {
-    setState(() {
-      _cardList.removeAt(index);
-    });
+  void _nextIndex() {
+    if (_currentIndex < widget.stack.cards!.length - 1) {
+      setState(() {
+        _currentIndex++;
+      });
+    }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _cardList = _getMatchCard();
+  void _prevIndex() {
+    if (_currentIndex > 0) {
+      setState(() {
+        _currentIndex--;
+      });
+    }
+  }
+
+  void _resetIndex() {
+    if (_currentIndex > 0) {
+      setState(() {
+        _currentIndex = 0;
+      });
+    }
   }
 
   @override
@@ -38,69 +51,68 @@ class _CardStackScreenState extends State<CardStackScreen> {
           .getData(),
       builder: (BuildContext context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          print(snap.data);
+          widget.stack.cards = snap.data;
+          widget.stack.cards!.sort((a, b) => a.order.compareTo(b.order));
           return Scaffold(
-            body: Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: _cardList,
-              ),
-            ),
-          );
-        } else {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DotLoader(
-                  color: Colors.deepPurple,
-                  duration: Duration(milliseconds: 800),
-                  size: 25,
+              body: Center(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: _buildCardStack(widget.stack.cards!),
                 ),
-              ],
-            ),
-          );
+              ),
+              bottomNavigationBar: CardStackBottomNav(
+                text: '${_currentIndex + 1}/${widget.stack.cards!.length}',
+                onPrev: _prevIndex,
+                onNext: _nextIndex,
+                onReset: _resetIndex,
+                onCancel: () {
+                  Navigator.of(context).pop();
+                },
+              ));
+        } else {
+          return LoadingScreen();
         }
       },
     );
   }
 
-  List<Widget> _getMatchCard() {
+  List<Widget> _buildCardStack(List<ContentCard> cards) {
     List<Widget> cardList = [];
+    int endIndex =
+        cards.length - _currentIndex > 3 ? 3 : cards.length - _currentIndex;
+    List<ContentCard> cardsToDisplay =
+        cards.sublist(_currentIndex, _currentIndex + endIndex);
 
-    for (int x = 0; x < 3; x++) {
-      cardList.add(Positioned(
-        top: (x + 1) * 10,
-        child: Draggable(
-          onDragEnd: (drag) {
-            print(drag);
-            _removeCard(x);
-          },
-          childWhenDragging: Container(),
-          feedback: Card(
-            elevation: 12,
-            color: Colors.grey[200],
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Container(
-              width: 240,
-              height: 300,
+    int sizeIndex = 0;
+    for (int i = cardsToDisplay.length - 1; i >= 0; i--) {
+      var cardWidth =
+          MediaQuery.of(context).size.width - 70.0 + ((sizeIndex + 1) * 10);
+      var cardHeight = MediaQuery.of(context).size.height - 150.0;
+      cardList.add(
+        Positioned(
+          bottom: ((sizeIndex + 1) * 10),
+          child: Draggable(
+            onDragEnd: (drag) {
+              if (drag.offset.dx.abs() > 50) {
+                _nextIndex();
+              }
+            },
+            childWhenDragging: Container(),
+            feedback: CardItem(
+              card: cardsToDisplay[i],
+              width: cardWidth,
+              height: cardHeight,
             ),
-          ),
-          child: Card(
-            elevation: 12,
-            color: Colors.grey[200],
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Container(
-              width: 240,
-              height: 300,
+            child: CardItem(
+              card: cardsToDisplay[i],
+              width: cardWidth,
+              height: cardHeight,
             ),
           ),
         ),
-      ));
+      );
+      sizeIndex++;
     }
-
     return cardList;
   }
 }

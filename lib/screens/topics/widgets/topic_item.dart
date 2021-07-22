@@ -14,7 +14,6 @@ class TopicItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: () {
             Future.delayed(Duration.zero, () {

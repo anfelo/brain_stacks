@@ -1,4 +1,5 @@
 import 'package:brain_stacks/models/models.dart';
+import 'package:brain_stacks/screens/screens.dart';
 import 'package:brain_stacks/screens/topics/widgets/topic_item.dart';
 import 'package:brain_stacks/services/globals.dart';
 import 'package:brain_stacks/widgets/widgets.dart';
@@ -31,18 +32,7 @@ class TopicsScreen extends StatelessWidget {
             bottomNavigationBar: AppBottomNav(),
           );
         } else {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DotLoader(
-                  color: Colors.deepPurple,
-                  duration: Duration(milliseconds: 800),
-                  size: 25,
-                ),
-              ],
-            ),
-          );
+          return LoadingScreen();
         }
       },
     );

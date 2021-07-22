@@ -5,6 +5,7 @@ class AppBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      elevation: 0,
       items: [
         BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.graduationCap, size: 20),

@@ -5,7 +5,7 @@ class CardStack {
   final String title;
   final String description;
   final String group;
-  final List<ContentCard>? cards;
+  List<ContentCard>? cards;
 
   CardStack({
     required this.id,

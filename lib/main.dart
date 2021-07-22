@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           bottomAppBarTheme: BottomAppBarTheme(
             color: Colors.black87,
           ),
-          primaryColor: Colors.deepPurple,
+          primaryColor: Colors.deepPurpleAccent,
           primarySwatch: Colors.deepPurple,
           accentColor: Colors.deepOrangeAccent,
           brightness: Brightness.dark,
@@ -46,6 +46,13 @@ class MyApp extends StatelessWidget {
             subtitle1: TextStyle(color: Colors.grey),
           ),
           buttonTheme: ButtonThemeData(height: 100.0),
+          cardTheme: CardTheme(
+            elevation: 12.0,
+            clipBehavior: Clip.antiAlias,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
         ),
       ),
     );
