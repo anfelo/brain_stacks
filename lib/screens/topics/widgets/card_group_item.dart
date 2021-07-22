@@ -4,6 +4,7 @@ import 'package:brain_stacks/models/models.dart';
 
 class CardGroupItem extends StatelessWidget {
   final CardStack stack;
+  final CardStack? nextStack;
   final bool isActive;
   final Function onPressed;
 
@@ -12,6 +13,7 @@ class CardGroupItem extends StatelessWidget {
     required this.stack,
     required this.isActive,
     required this.onPressed,
+    this.nextStack,
   }) : super(key: key);
 
   @override
@@ -48,19 +50,22 @@ class CardGroupItem extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    CardStackScreen(stack: stack),
+                                    CardStackScreen(
+                                  stack: stack,
+                                  nextStack: nextStack,
+                                ),
                               ),
                             );
                           });
                         },
                         child: Text('START LEARNING'),
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 25.0,
-                            horizontal: 50.0,
+                          padding: Theme.of(context).buttonTheme.padding,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

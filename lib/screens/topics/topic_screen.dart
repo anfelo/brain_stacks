@@ -33,11 +33,13 @@ class _TopicScreenState extends State<TopicScreen> {
         widgets.add(
           CardGroupTitle(title: group.title),
         );
-        stacks.forEach((stack) {
+        for (var i = 0; i < stacks.length; i++) {
+          var nextStack = i < stacks.length - 1 ? stacks[i + 1] : null;
           widgets.add(
             CardGroupItem(
-              stack: stack,
-              isActive: _selectedStack == stack.id,
+              stack: stacks[i],
+              nextStack: nextStack,
+              isActive: _selectedStack == stacks[i].id,
               onPressed: (String selected) {
                 setState(() {
                   _selectedStack = selected;
@@ -45,7 +47,7 @@ class _TopicScreenState extends State<TopicScreen> {
               },
             ),
           );
-        });
+        }
       }
     });
     return widgets;

@@ -45,7 +45,16 @@ class MyApp extends StatelessWidget {
             headline1: TextStyle(fontWeight: FontWeight.bold),
             subtitle1: TextStyle(color: Colors.grey),
           ),
-          buttonTheme: ButtonThemeData(height: 100.0),
+          buttonTheme: ButtonThemeData(
+            height: 100.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 25.0,
+              horizontal: 50.0,
+            ),
+          ),
           cardTheme: CardTheme(
             elevation: 12.0,
             clipBehavior: Clip.antiAlias,
