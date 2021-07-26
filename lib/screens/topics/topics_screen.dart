@@ -1,7 +1,7 @@
 import 'package:brain_stacks/models/models.dart';
 import 'package:brain_stacks/screens/screens.dart';
 import 'package:brain_stacks/screens/topics/widgets/topic_item.dart';
-import 'package:brain_stacks/services/globals.dart';
+import 'package:brain_stacks/services/services.dart';
 import 'package:brain_stacks/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class TopicsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Global.topicsRef.getData(),
+      future: GlobalService.topicsRef.getData(),
       builder: (BuildContext context, AsyncSnapshot snap) {
         if (snap.hasData) {
           List<Topic> topics = snap.data;

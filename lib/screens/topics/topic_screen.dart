@@ -1,7 +1,9 @@
 import 'package:brain_stacks/models/models.dart';
 import 'package:brain_stacks/screens/topics/widgets/card_group_item.dart';
 import 'package:brain_stacks/screens/topics/widgets/card_group_title.dart';
+import 'package:brain_stacks/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TopicScreen extends StatefulWidget {
   final Topic topic;
@@ -34,11 +36,9 @@ class _TopicScreenState extends State<TopicScreen> {
           CardGroupTitle(title: group.title),
         );
         for (var i = 0; i < stacks.length; i++) {
-          var nextStack = i < stacks.length - 1 ? stacks[i + 1] : null;
           widgets.add(
             CardGroupItem(
               stack: stacks[i],
-              nextStack: nextStack,
               isActive: _selectedStack == stacks[i].id,
               onPressed: (String selected) {
                 setState(() {
@@ -55,6 +55,7 @@ class _TopicScreenState extends State<TopicScreen> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<CardStackService>().setCurrentStacks(widget.topic.stacks);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

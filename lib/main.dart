@@ -20,9 +20,10 @@ class MyApp extends StatelessWidget {
           value: AuthService().authChanges,
           initialData: null,
         ),
+        Provider<CardStackService>(create: (_) => CardStackService()),
       ],
       child: MaterialApp(
-        title: Global.title,
+        title: GlobalService.title,
         debugShowCheckedModeBanner: false,
         routes: {
           LoginScreen.routeName: (context) => LoginScreen(),
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           TopicsScreen.routeName: (context) => TopicsScreen(),
         },
         theme: ThemeData(
-          fontFamily: 'Nunito',
+          fontFamily: 'Open Sans',
           bottomAppBarTheme: BottomAppBarTheme(
             color: Colors.black87,
           ),

@@ -50,7 +50,7 @@ class CardStackBottomNav extends StatelessWidget {
             onPressed: () => onReset(),
             icon: Icon(
               FontAwesomeIcons.undo,
-              color: Theme.of(context).accentColor,
+              color: Colors.greenAccent,
             ),
           ),
         ],

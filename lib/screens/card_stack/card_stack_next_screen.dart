@@ -1,18 +1,21 @@
 import 'package:brain_stacks/models/card_stack.dart';
 import 'package:brain_stacks/screens/screens.dart';
+import 'package:brain_stacks/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class CardStackNextScreen extends StatelessWidget {
-  final CardStack? nextStack;
+  final CardStack currentStack;
 
   const CardStackNextScreen({
     Key? key,
-    this.nextStack,
+    required this.currentStack,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var nextStack = context.read<CardStackService>().getNextStack(currentStack);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -50,33 +53,53 @@ class CardStackNextScreen extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   CardStackScreen(
-                                stack: nextStack!,
+                                stack: nextStack,
                               ),
                             ),
                           );
                         },
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(50.0, 20.0, 20.0, 20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'CARDS STACK',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              left: -10,
+                              top: 20,
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.deepPurple.withOpacity(0.5),
+                                ),
+                                child: Icon(
+                                  FontAwesomeIcons.layerGroup,
                                   color: Colors.deepPurple,
                                 ),
                               ),
-                              Text(
-                                nextStack!.title,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  50.0, 20.0, 20.0, 20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'CARDS STACK',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.deepPurple,
+                                    ),
+                                  ),
+                                  Text(
+                                    nextStack.title,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

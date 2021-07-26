@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
-import './globals.dart';
+import 'global_service.dart';
 
 class Document<T> {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -14,11 +14,11 @@ class Document<T> {
   }
 
   Future<T> getData() {
-    return ref.get().then((v) => Global.models[T](v.data) as T);
+    return ref.get().then((v) => GlobalService.models[T](v.data) as T);
   }
 
   Stream<T> streamData() {
-    return ref.snapshots().map((v) => Global.models[T](v.data) as T);
+    return ref.snapshots().map((v) => GlobalService.models[T](v.data) as T);
   }
 
   Future<void> upsert(Map data) {
@@ -38,7 +38,7 @@ class Collection<T> {
   Future<List<T>> getData() async {
     var snapshots = await ref.get().then(
           (snapshot) => snapshot.docs
-              .map((doc) => Global.models[T](doc.data()) as T)
+              .map((doc) => GlobalService.models[T](doc.data()) as T)
               .toList(),
         );
     return snapshots;
@@ -47,7 +47,7 @@ class Collection<T> {
   Stream<List<T>> streamData() {
     return ref.snapshots().map(
           (list) => list.docs
-              .map((doc) => Global.models[T](doc.data()) as T)
+              .map((doc) => GlobalService.models[T](doc.data()) as T)
               .toList(),
         );
   }

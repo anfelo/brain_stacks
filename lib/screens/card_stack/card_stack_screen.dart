@@ -7,12 +7,10 @@ import 'package:flutter/material.dart';
 
 class CardStackScreen extends StatefulWidget {
   final CardStack stack;
-  final CardStack? nextStack;
 
   CardStackScreen({
     Key? key,
     required this.stack,
-    this.nextStack,
   }) : super(key: key);
 
   @override
@@ -30,8 +28,9 @@ class _CardStackScreenState extends State<CardStackScreen> {
     if (_currentIndex == widget.stack.cards!.length) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) =>
-              CardStackNextScreen(nextStack: widget.nextStack),
+          builder: (BuildContext context) => CardStackNextScreen(
+            currentStack: widget.stack,
+          ),
         ),
       );
     }
@@ -61,6 +60,17 @@ class _CardStackScreenState extends State<CardStackScreen> {
       builder: (BuildContext context, AsyncSnapshot snap) {
         if (snap.hasData) {
           widget.stack.cards = snap.data;
+          if (widget.stack.cards!.length == 0) {
+            Future.delayed(Duration.zero, () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => CardStackNextScreen(
+                    currentStack: widget.stack,
+                  ),
+                ),
+              );
+            });
+          }
           widget.stack.cards!.sort((a, b) => a.order.compareTo(b.order));
           return Scaffold(
               body: Center(

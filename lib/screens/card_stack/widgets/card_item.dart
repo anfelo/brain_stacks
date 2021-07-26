@@ -55,9 +55,9 @@ class CardItem extends StatelessWidget {
                 card.content,
                 overflow: TextOverflow.fade,
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 22.0,
                   color: Colors.black87,
-                  height: 1.3,
+                  height: 1.5,
                 ),
               ),
             ),

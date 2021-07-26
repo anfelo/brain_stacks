@@ -1,7 +1,7 @@
 import 'package:brain_stacks/models/models.dart';
 import 'package:brain_stacks/services/services.dart';
 
-class Global {
+class GlobalService {
   // App Data
   static final String title = 'Brain Stacks';
 

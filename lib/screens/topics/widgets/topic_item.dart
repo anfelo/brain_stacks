@@ -5,6 +5,7 @@ import '../topic_screen.dart';
 
 class TopicItem extends StatelessWidget {
   final Topic topic;
+
   const TopicItem({
     Key? key,
     required this.topic,
@@ -12,6 +13,8 @@ class TopicItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    topic.stacks.sort((a, b) => a.group.compareTo(b.group));
+    topic.groups.sort((a, b) => a.title.compareTo(b.title));
     return Container(
       child: Card(
         child: InkWell(
