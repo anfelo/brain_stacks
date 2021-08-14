@@ -106,7 +106,7 @@ class _CardStackScreenState extends State<CardStackScreen> {
     for (int i = cardsToDisplay.length - 1; i >= 0; i--) {
       var cardWidth =
           MediaQuery.of(context).size.width - 70.0 + ((sizeIndex + 1) * 10);
-      var cardHeight = MediaQuery.of(context).size.height - 150.0;
+      var cardHeight = MediaQuery.of(context).size.height - 115.0;
       cardList.add(
         Positioned(
           bottom: ((sizeIndex + 1) * 10),

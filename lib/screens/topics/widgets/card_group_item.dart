@@ -62,24 +62,54 @@ class CardGroupItem extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 12.0),
-                          ElevatedButton(
-                            onPressed: () {
-                              Future.delayed(Duration.zero, () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        CardStackScreen(stack: stack),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Future.delayed(Duration.zero, () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            CardStackScreen(stack: stack),
+                                      ),
+                                    );
+                                  });
+                                },
+                                child: Text('START LEARNING'),
+                                style: ElevatedButton.styleFrom(
+                                  padding:
+                                      Theme.of(context).buttonTheme.padding,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                );
-                              });
-                            },
-                            child: Text('START LEARNING'),
-                            style: ElevatedButton.styleFrom(
-                              padding: Theme.of(context).buttonTheme.padding,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
+                              Ink(
+                                decoration: const ShapeDecoration(
+                                  color: Colors.greenAccent,
+                                  shape: CircleBorder(),
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Future.delayed(Duration.zero, () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              CodeSnippetScreen(),
+                                        ),
+                                      );
+                                    });
+                                  },
+                                  icon: Icon(
+                                    FontAwesomeIcons.code,
+                                    size: 20.0,
+                                  ),
+                                  color: Colors.black54,
+                                  iconSize: 30.0,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
